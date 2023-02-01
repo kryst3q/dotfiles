@@ -11,6 +11,9 @@ for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
 # git
 alias gst="git status"
+alias gpr="git pull -r"
+alias gcm="git checkout main"
+alias gp="git push"
 
 # pacman
 alias pacu="sudo pacman -Syu"             # update
