@@ -14,6 +14,9 @@ alias gst="git status"
 alias gpr="git pull -r"
 alias gcm="git checkout main"
 alias gp="git push"
+alias gl="git log"
+alias gd="git diff"
+alias gdc="git diff --cached"
 
 # pacman
 alias pacu="sudo pacman -Syu"             # update
