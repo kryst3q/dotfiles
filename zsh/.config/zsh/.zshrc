@@ -29,8 +29,8 @@ autoload -Uz cursor_mode; cursor_mode
 source "${ZDOTDIR}/plugins/bd.zsh"
 
 # Enable fuzzy search with fzf
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+source ${FZF_PATH}/completion.zsh
+source ${FZF_PATH}/key-bindings.zsh
 
 # Enable syntax highliting in shell. MUST be sourced at the end of the file!
 source "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
