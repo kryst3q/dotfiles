@@ -38,3 +38,5 @@ alias khali="khal interactive"
 # ls
 alias ls="ls --color"
 
+# kitty
+alias icat="kitty +kitten icat --align left"
