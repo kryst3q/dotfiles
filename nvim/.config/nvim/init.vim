@@ -6,6 +6,8 @@ noremap <UP> <NOP>
 noremap <DOWN> <NOP>
 noremap <LEFT> <NOP>
 noremap <RIGHT> <NOP>
+
+" add shortcut fot saving document changes
 noremap <silent> <c-s> :w<CR>
 
 " no swap file
@@ -33,13 +35,18 @@ set nofoldenable
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <S-f> :NERDTreeFind<CR>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+" Markdown formatting shortcuts
+autocmd FileType markdown,octopress let g:surround_{char2nr('i')} = "*\r*"
+autocmd FileType markdown,octopress let g:surround_{char2nr('b')} = "**\r**"
+autocmd FileType markdown,octopress let g:surround_{char2nr('s')} = "~~\r~~"
 
 " Set polish language for spelling check
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
@@ -62,5 +69,8 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'sedm0784/vim-you-autocorrect'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'preservim/vim-markdown'
 call plug#end()
 
