@@ -1,0 +1,11 @@
+[Unit]
+Description=USB Automounting
+BindsTo=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/udiskie
+
+
+[Install]
+WantedBy=xsession.target

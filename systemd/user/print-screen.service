@@ -1,0 +1,10 @@
+[Unit]
+Description=Flameshot Print Screeen
+BindsTo=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/flameshot
+Restart=on-failure
+
+[Install]
+WantedBy=xsession.target
