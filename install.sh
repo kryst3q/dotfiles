@@ -2,7 +2,7 @@
 
 # TODO: check if zsh is set as SHELL
 
-if [ $(uname) = "Linux" ]; do
+if [ $(uname) = "Linux" ]; then
     # # Make enabling default keyring possible at login
     # # TODO: check if gnome-keyring was installed
     # echo "auth       optional     pam_gnome_keyring.so" >> /etc/pam.d/login
@@ -10,7 +10,7 @@ if [ $(uname) = "Linux" ]; do
 
     # TODO: check if xorg and xorg-xinit are installed
     cp ./.xinitrc ${HOME}/
-done
+fi
 
 cp ./zsh/.config/zsh/.zshenv ${HOME}/
 
@@ -22,10 +22,10 @@ for i in * ; do
   fi
 done
 
-if [ $(uname) = "Linux" ]; do
+if [ $(uname) = "Linux" ]; then
     for i in ${XDG_CONFIG_HOME}/systemd/user/*.service ; do
       if [ -f "$i" ]; then
         systemctl --user enable ${i}
       fi
     done
-done
+fi
