@@ -2,5 +2,6 @@ zsh/.config/zsh/.zhistory
 zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_history
 nvim/.config/nvim/undo
-systemd/user/*.*.requires
-systemd/user/*.*.wants
+systemd/.config/systemd/user/*.*.requires
+systemd/.config/systemd/user/*.*.wants
+aerc/.config/aerc/accounts.conf
