@@ -96,34 +96,19 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:firefox"
+set $ws1 "1:browser"
 set $ws2 "2:terminal"
-set $ws3 "3:pcmanfm"
-set $ws4 "4:thunderbird"
-set $ws5 "5:signal"
+set $ws3 "3:chat"
+set $ws4 "4:ide"
+set $ws5 "5:files"
 
 # Assign programs to workspaces
-assign [class="^Firefox$"] $ws1
-assign [class="^Terminator$"] $ws2
-#assign [class="^Pycharm$"] $ws2
-assign [class="^PCManFM$"] $ws3
-#assign [class="^KeePassXC$"] $ws10
-#assign [class="^Evince$"] $ws5
-assign [class="^Thunderbird$"] $ws4
-#assign [class="^PhpStorm$"] $ws2
-#assign [class="gitk"] $ws7
-assign [class="^Signal$"] $ws5
-#for_window [class="^gitk$"] focus
-#for_window [class="^PhpStorm$"] focus
-for_window [class="^Signal$"] focus
-#for_window [class="^Evince$"] rename workspace 5 to "5:evince", move container to workspace "5:evince", workspace "5:evince", focus
-#for_window [class="^Evince$"] focus
-#assign [class="^Gimp$"] $ws6
-#for_window [class="^Gimp$"] rename workspace 6 to "6:gimp", move container to workspace "6:gimp", workspace "6:gimp", focus
-#for_window [class="^Gimp$"] focus
-#assign [class="^Inkscape$"] $ws6
-#for_window [class="^Inkscape$"] rename workspace 6 to "6:inkscape", move container to workspace "6:inkscape", workspace "6:inkscape", focus
-#for_window [class="^Inkscape$"] focus
+assign [class="^Firefox|Edge|Chrome$"] $ws1
+assign [class="^Kitty$"] $ws2
+assign [class="^Slack$"] $ws3
+assign [class="^PhpStorm|VSCode$"] $ws4
+assign [class="^PCManFM$"] $ws5
+assign [class="^Teams$"] $ws6
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -195,13 +180,11 @@ for_window [class="galculator"] floating enable
 
 exec dunst
 exec nm-applet
-exec --no-startup-id i3-msg 'workspace $ws1; exec firefox'
-#exec --no-startup-id i3-msg 'workspace $ws2; exec terminator'
+exec --no-startup-id i3-msg 'workspace $ws1; exec microsoft-edge-stable'
 exec --no-startup-id i3-msg 'workspace $ws2; exec kitty --single-instance'
-#exec --no-startup-id i3-msg 'workspace $ws2; exec urxvt'
-#exec --no-startup-id i3-msg 'workspace $ws3; exec pcmanfm'
-#exec --no-startup-id i3-msg 'workspace $ws4; exec signal'
-#exec --no-startup-id i3-msg 'workspace $ws5; exec thunderbird'
+exec --no-startup-id i3-msg 'workspace $ws3; exec slack'
+exec --no-startup-id i3-msg 'workspace $ws4; exec phpstorm'
+exec --no-startup-id i3-msg 'workspace $ws6; exec teams'
 
 bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
 bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
@@ -210,9 +193,10 @@ bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
 bindsym $mod+Ctrl+3 exec /home/kryst3q/Skrypty/screenshots-full.sh
 bindsym $mod+Ctrl+4 exec flameshot gui -p ${SCREENSHOTS_DIR}
 
-bindsym XF86AudioRaiseVolume exec change-volume 5%+ unmute
-bindsym XF86AudioLowerVolume exec change-volume 5%-
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
+bindsym XF86AudioMute exec amixer -q sset Master toggle 
+bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 
 bindsym $mod+Ctrl+L exec i3lock-fancy
 
