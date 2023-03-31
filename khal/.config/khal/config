@@ -1,11 +1,11 @@
 [calendars]
 
 [[my_calendars_local]]
-path = ${XDG_DATA_DIR}/calendars/*
+path = ${XDG_DATA_HOME}/calendars/*
 type = discover
 
 [[my_contacts_local]]
-path = ${XDG_DATA_DIR}/contacts/*
+path = ${XDG_DATA_HOME}/contacts/*
 type = discover
 
 [locale]
