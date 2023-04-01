@@ -103,7 +103,7 @@ set $ws4 "4:ide"
 set $ws5 "5:files"
 
 # Assign programs to workspaces
-assign [class="^Firefox|Edge|Chrome$"] $ws1
+assign [class="^Firefox|Microsoft\sEdge|Chrome$"] $ws1
 assign [class="^Kitty$"] $ws2
 assign [class="^Slack$"] $ws3
 assign [class="^PhpStorm|VSCode$"] $ws4
