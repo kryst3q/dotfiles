@@ -40,3 +40,10 @@ alias ls="ls --color"
 
 # kitty
 alias icat="kitty +kitten icat --align left"
+
+# docker
+alias dcud="docker-compose up -d"
+alias dcd="docker-compose down"
+alias dcps="docker-compose ps"
+alias dcl="docker-compose logs"
+alias dclt="docker-compose logs --tail"
