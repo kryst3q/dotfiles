@@ -5,3 +5,4 @@ nvim/.config/nvim/undo
 systemd/.config/systemd/user/*.*.requires
 systemd/.config/systemd/user/*.*.wants
 aerc/.config/aerc/accounts.conf
+i3/.config/i3/config.d/*.conf

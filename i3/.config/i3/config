@@ -103,12 +103,8 @@ set $ws4 "4:ide"
 set $ws5 "5:files"
 
 # Assign programs to workspaces
-assign [class="^Firefox|Microsoft\sEdge|Chrome$"] $ws1
-assign [class="^Kitty$"] $ws2
-assign [class="^Slack$"] $ws3
-assign [class="^PhpStorm|VSCode$"] $ws4
+assign [class="^kitty$"] $ws2
 assign [class="^PCManFM$"] $ws5
-assign [class="^Teams$"] $ws6
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -180,18 +176,14 @@ for_window [class="galculator"] floating enable
 
 exec dunst
 exec nm-applet
-exec --no-startup-id i3-msg 'workspace $ws1; exec microsoft-edge-stable'
 exec --no-startup-id i3-msg 'workspace $ws2; exec kitty --single-instance'
-exec --no-startup-id i3-msg 'workspace $ws3; exec slack'
-exec --no-startup-id i3-msg 'workspace $ws4; exec phpstorm'
-exec --no-startup-id i3-msg 'workspace $ws6; exec teams'
 
 bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
 bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
 bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
 bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
-bindsym $mod+Ctrl+3 exec /home/kryst3q/Skrypty/screenshots-full.sh
-bindsym $mod+Ctrl+4 exec flameshot gui -p ${SCREENSHOTS_DIR}
+bindsym $mod+Ctrl+3 exec $HOME/Skrypty/screenshots-full.sh
+bindsym $mod+Ctrl+4 exec flameshot gui -p $SCREENSHOTS_DIR
 
 bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
@@ -204,3 +196,4 @@ workspace_layout tabbed
 
 for_window [floating] resize set 900 500
 
+include $XDG_CONFIG_HOME/i3/config.d/*.conf
