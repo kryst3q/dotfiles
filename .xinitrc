@@ -13,5 +13,8 @@ flameshot &
 # Run Nextcloud client
 nextcloud &
 
+# Run screen locker on suspend, hibernate, lock-session, and unlock-session
+xss-lock -- i3lock-fancy -n &
+
 # Run i3 Window Manager
 i3
