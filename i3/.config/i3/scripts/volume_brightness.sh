@@ -54,6 +54,10 @@ function show_brightness_notif {
     dunstify -t 1000 -r 2593 -u normal "$brightness_icon $brightness%" -h int:value:$brightness -h string:hlcolor:$bar_color
 }
 
+function play_sound_on_volume_change {
+    canberra-gtk-play -i audio-volume-change
+}
+
 # Main function - Takes user input, "volume_up", "volume_down", "brightness_up", or "brightness_down"
 case $1 in
     volume_up)
@@ -66,18 +70,21 @@ case $1 in
         amixer -q sset Master $volume_step%+
     fi
     show_volume_notif
+    play_sound_on_volume_change
     ;;
 
     volume_down)
     # Raises volume and displays the notification
     amixer -q sset Master $volume_step%-
     show_volume_notif
+    play_sound_on_volume_change
     ;;
 
     volume_mute)
     # Toggles mute and displays the notification
     amixer -q sset Master toggle
     show_volume_notif
+    play_sound_on_volume_change
     ;;
 
     brightness_up)
