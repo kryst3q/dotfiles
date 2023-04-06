@@ -174,8 +174,6 @@ bar {
 # Special treating of programs
 for_window [class="galculator"] floating enable
 
-exec dunst
-exec nm-applet
 exec --no-startup-id i3-msg 'workspace $ws2; exec kitty --single-instance'
 
 bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
@@ -191,6 +189,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/vo
 bindsym XF86AudioMute exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/volume_brightness.sh volume_mute
 bindsym XF86MonBrightnessUp exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/volume_brightness.sh brightness_up
 bindsym XF86MonBrightnessDown exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/volume_brightness.sh brightness_down
+bindsym XF86WLAN exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/toggle_wifi.sh
+bindsym XF86Bluetooth exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/toggle_bluetooth.sh
 
 bindsym $mod+Ctrl+L exec i3lock-fancy
 

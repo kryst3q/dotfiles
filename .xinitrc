@@ -4,6 +4,15 @@ dbus-update-activation-environment --all
 # Connect to keyring
 gnome-keyring-daemon --start --components=secrets,pkcs11,ssh
 
+# Run notification system
+dunst &
+
+# Run network manager applet
+nm-applet &
+
+# Run blueman applet
+blueman-applet &
+
 # Run USB auto-mounting daemon
 udiskie &
 
