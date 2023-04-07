@@ -32,9 +32,6 @@ alias tdlp="todo list personal"
 alias tdla="todo list arch-linux"
 alias tdd="todo done"
 
-# khal
-alias khali="khal interactive"
-
 # ls
 alias ls="ls --color"
 
