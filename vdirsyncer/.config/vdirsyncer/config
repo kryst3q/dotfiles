@@ -1,0 +1,40 @@
+[general]
+status_path = "~/.config/local/state/vdirsyncer/status/"
+
+[pair my_contacts]
+a = "my_contacts_local"
+b = "my_contacts_remote"
+collections = ["from a", "from b"]
+conflict_resolution = "b wins"
+
+[storage my_contacts_local]
+type = "filesystem"
+path = "~/.config/local/share/contacts/"
+fileext = ".vcf"
+
+[storage my_contacts_remote]
+type = "carddav"
+
+# We can simplify this URL here as well. In theory it shouldn't matter.
+url = "https://chmura.kulesz.pl/remote.php/dav/addressbooks/users/Krystian/contacts/"
+username = "Krystian"
+password.fetch = ["command", "secret-tool", "lookup", "NextcloudContacts", "Krystian"]
+
+[pair my_calendars]
+a = "my_calendars_local"
+b = "my_calendars_remote"
+collections = ["from a", "from b"]
+metadata = ["color"]
+conflict_resolution = "b wins"
+
+[storage my_calendars_local]
+type = "filesystem"
+path = "~/.config/local/share/calendars/"
+fileext = ".ics"
+
+[storage my_calendars_remote]
+type = "caldav"
+
+url = "https://chmura.kulesz.pl/remote.php/dav"
+username = "Krystian"
+password.fetch = ["command", "secret-tool", "lookup", "NextcloudCalendars", "Krystian"]
