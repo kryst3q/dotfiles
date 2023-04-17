@@ -1,0 +1,9 @@
+[Unit]
+Description=(geo)clue for redshift and darkman
+
+[Service]
+ExecStart=/usr/lib/geoclue-2.0/demos/agent
+
+[Install]
+WantedBy=default.target
+

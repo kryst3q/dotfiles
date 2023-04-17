@@ -28,5 +28,8 @@ xss-lock -- i3lock-fancy -n &
 # Restore previous session background
 ~/.fehbg &
 
+# Run xsettings daemon to be able to change system theme depending on time of day
+xfsettingsd --daemon
+
 # Run i3 Window Manager
 i3

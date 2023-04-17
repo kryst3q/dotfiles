@@ -7,3 +7,8 @@ systemd/.config/systemd/user/*.*.wants
 aerc/.config/aerc/accounts.conf
 i3/.config/i3/config.d/*.conf
 todoman/.config/todoman/__pycache__
+local/.config/local/state
+local/.config/local/share/*
+!local/.config/local/share/dark-mode.d
+!local/.config/local/share/light-mode.d
+
