@@ -25,5 +25,8 @@ nextcloud &
 # Run screen locker on suspend, hibernate, lock-session, and unlock-session
 xss-lock -- i3lock-fancy -n &
 
+# Restore previous session background
+~/.fehbg &
+
 # Run i3 Window Manager
 i3
