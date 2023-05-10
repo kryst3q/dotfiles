@@ -72,5 +72,6 @@ Plug 'sedm0784/vim-you-autocorrect'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/vim-markdown'
+Plug 'mechatroner/rainbow_csv'
 call plug#end()
 
