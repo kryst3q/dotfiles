@@ -103,8 +103,8 @@ set $ws4 "4:ide"
 set $ws5 "5:files"
 
 # Assign programs to workspaces
-assign [class="^kitty$"] $ws2
-assign [class="^Pcmanfm$"] $ws5
+assign [class="kitty"] $ws2
+assign [class="Thunar"] $ws5
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
