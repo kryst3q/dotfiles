@@ -44,3 +44,6 @@ alias dcd="docker-compose down"
 alias dcps="docker-compose ps"
 alias dcl="docker-compose logs"
 alias dclt="docker-compose logs --tail"
+
+source $XDG_CONFIG_HOME/zsh/aliases.d/*.aliases
+
