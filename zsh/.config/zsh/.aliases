@@ -37,6 +37,8 @@ alias ls="ls --color"
 
 # kitty
 alias icat="kitty +kitten icat --align left"
+alias ssh="kitty +kitten ssh"
+alias diff="kitty +kitten diff"
 
 # docker
 alias dcud="docker-compose up -d"
@@ -44,6 +46,9 @@ alias dcd="docker-compose down"
 alias dcps="docker-compose ps"
 alias dcl="docker-compose logs"
 alias dclt="docker-compose logs --tail"
+
+# neovim
+alias nvim="nvim --listen /tmp/nvimsocket" # required so running https://github.com/mhinz/neovim-remote gives possibility to change to light/dark mode
 
 source $XDG_CONFIG_HOME/zsh/aliases.d/*.aliases
 

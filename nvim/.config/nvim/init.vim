@@ -62,6 +62,27 @@ endf
 command! -nargs=0 EnablePlAutocorrect call EnableSpellcheck('pl')
 command! -nargs=0 EnableEnAutocorrect call EnableSpellcheck('en')
 
+" everforest theme configuration
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+
+if system('xfconf-query -c xsettings -p /Net/ThemeName') =~ '-dark'
+    set background=dark
+else
+    set background=light
+endif
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'hard'
+
+" For better performance
+let g:everforest_better_performance = 1
+
+
 " vim-plug plugins list
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'tpope/vim-commentary'
@@ -73,5 +94,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/vim-markdown'
 Plug 'mechatroner/rainbow_csv'
+Plug 'sainnhe/everforest'
 call plug#end()
 
+colorscheme everforest
