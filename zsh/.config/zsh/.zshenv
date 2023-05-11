@@ -39,3 +39,6 @@ export SAVEHIST=10000
 export EDITOR="nvim"
 export VISUAL="gedit"
 
+# terminal
+export TERM="xterm-kitty"
+
