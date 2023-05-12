@@ -182,6 +182,7 @@ bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
 bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
 bindsym $mod+Ctrl+3 exec flameshot screen -p "$SCREENSHOTS_DIR"
 bindsym $mod+Ctrl+4 exec flameshot gui -p "$SCREENSHOTS_DIR"
+bindsym $mod+C exec clipmenu
 
 bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 bindsym XF86AudioRaiseVolume exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/volume_brightness.sh volume_up

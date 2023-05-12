@@ -31,5 +31,8 @@ xss-lock -- i3lock-fancy -n &
 # Run xsettings daemon to be able to change system theme depending on time of day
 xfsettingsd --daemon
 
+# Run clipmenu deamon. NOTE: it already comes with systemd service unit. Remember when move everything to this solution.
+clipmenud &
+
 # Run i3 Window Manager
 i3

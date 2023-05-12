@@ -42,3 +42,6 @@ export VISUAL="gedit"
 # terminal
 export TERM="xterm-kitty"
 
+# clipmenu
+export CM_IGNORE_WINDOW="Seahorse"
+
