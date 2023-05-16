@@ -31,6 +31,9 @@ set softtabstop=4
 set shiftwidth=4
 set nofoldenable
 
+" disable mode displaying - now lightline is doing it
+set noshowmode
+
 " NERDTree configuration
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -95,6 +98,54 @@ Plug 'tpope/vim-repeat'
 Plug 'preservim/vim-markdown'
 Plug 'mechatroner/rainbow_csv'
 Plug 'sainnhe/everforest'
+Plug 'itchyny/lightline.vim'
+Plug 'amiorin/vim-project'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+Plug 'preservim/tagbar'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Preview markdown file in browser
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'phpactor/phpactor'
+" syntax highlighting
+Plug 'PotatoesMaster/i3-vim-syntax' " i3 config
+Plug 'chr4/nginx.vim' " nginx
+Plug 'wgwoods/vim-systemd-syntax' " systemd
 call plug#end()
 
 colorscheme everforest
+
+" Generate ctags every time php file will be saved
+au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+
+" configure searching
+let $FZF_DEFAULT_COMMAND = 'find .'
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>a :Ag<CR>
+
+" configure php language support
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+" gd to go to definition
+nmap <silent> gd <Plug>(coc-definition)
+" gr to go to reference
+nmap <silent> gr <Plug>(coc-references)
+
+" configure shortcut for displaying given class methods and properties
+nmap <F9> :TagbarToggle<CR>
+
+" configure snippets shortcuts
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
