@@ -50,5 +50,8 @@ alias dclt="docker-compose logs --tail"
 # neovim
 alias nvim="nvim --listen /tmp/nvimsocket" # required so running https://github.com/mhinz/neovim-remote gives possibility to change to light/dark mode
 
+# exa
+alias lx="exa --long --icons"
+
 source $XDG_CONFIG_HOME/zsh/aliases.d/*.aliases
 
