@@ -17,9 +17,8 @@ source ${ZDOTDIR}/plugins/completion.sh  # Using this function
 fpath=(${ZDOTDIR}/prompt $fpath)
 autoload -Uz prompt_purification_setup; prompt_purification_setup
 
-# Set proper cursor for EDIT and INSERT modes
+# Add plugins directory to path
 fpath=(${ZDOTDIR}/plugins $fpath)
-autoload -Uz cursor_mode; cursor_mode
 
 # Enable quick nested dir change by usinf bd
 source "${ZDOTDIR}/plugins/bd.zsh"
@@ -30,7 +29,7 @@ source ${FZF_PATH}/key-bindings.zsh
 
 # Enable vim keybings in shell provided by zsh-vi-mode
 export KEYTIMEOUT=1
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source "${ZDOTDIR}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 # Enable syntax highliting in shell. MUST be sourced at the end of the file!
 source "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
