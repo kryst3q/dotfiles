@@ -109,6 +109,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'rest-nvim/rest.nvim'
+Plug 'tpope/vim-dadbod'
 " syntax highlighting
 Plug 'PotatoesMaster/i3-vim-syntax' " i3 config
 Plug 'chr4/nginx.vim' " nginx
@@ -286,4 +287,9 @@ lua <<EOF
       yank_dry_run = true,
     }
 EOF
+
+let local_config = stdpath('config') . '/local.vim'
+if filereadable(local_config)
+    execute 'source ' . local_config
+endif
 

@@ -3,6 +3,7 @@ zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_history
 zsh/.config/zsh/aliases.d/*.aliases
 nvim/.config/nvim/undo
+nvim/.config/nvim/local.vim
 systemd/.config/systemd/user/*.*.requires
 systemd/.config/systemd/user/*.*.wants
 aerc/.config/aerc/accounts.conf
