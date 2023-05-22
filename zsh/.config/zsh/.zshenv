@@ -45,3 +45,5 @@ export TERM="xterm-kitty"
 # clipmenu
 export CM_IGNORE_WINDOW="Seahorse"
 
+# jira-cli
+export JIRA_AUTH_TYPE="bearer"
