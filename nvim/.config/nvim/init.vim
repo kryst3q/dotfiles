@@ -104,12 +104,25 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'preservim/tagbar'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Preview markdown file in browser
+" Preview markdown file in browser
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} 
 Plug 'neovim/nvim-lspconfig'
+" snippets engine
+Plug 'SirVer/ultisnips'
+" snippets for different languages
+Plug 'honza/vim-snippets'
+" middleware between snippets engine and cmp
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'rest-nvim/rest.nvim'
 Plug 'tpope/vim-dadbod'
+Plug 'Hoffs/omnisharp-extended-lsp.nvim'
 " syntax highlighting
 Plug 'PotatoesMaster/i3-vim-syntax' " i3 config
 Plug 'chr4/nginx.vim' " nginx
@@ -132,12 +145,6 @@ let g:lightline = {
 let $FZF_DEFAULT_COMMAND = 'find .'
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>a :Ag<CR>
-
-" configure php language support
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " configure shortcut for displaying given class methods and properties
 nmap <F9> :TagbarToggle<CR>
@@ -166,12 +173,111 @@ let g:lightline = {
     \}
 
 lua <<EOF
+    require('cmp_nvim_ultisnips').setup{}
+
+    -- Set up nvim-cmp.
+    local cmp = require'cmp'
+
+    cmp.setup({
+      snippet = {
+        -- REQUIRED - you must specify a snippet engine
+        expand = function(args)
+          vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        end,
+      },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
+        ['<C-l>'] = cmp.mapping(function(fallback) -- Jump to the next placeholder in the snippet
+          if luasnip.jumpable(1) then
+            luasnip.jump(1)
+          else
+            fallback()
+          end
+        end, {'i', 's'}),
+        ['<C-h>'] = cmp.mapping(function(fallback) -- Jump to the previous placeholder in the snippet
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, {'i', 's'}),
+      }),
+      sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'ultisnips' }, -- For ultisnips users.
+      }, {
+        { name = 'buffer' },
+      })
+    })
+
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    
     -- Setup language servers.
     local lspconfig = require('lspconfig')
-    lspconfig.pylsp.setup{}
-    lspconfig.phpactor.setup{}
-    lspconfig.jdtls.setup{}
+    lspconfig.pylsp.setup {
+      capabilities = capabilities,
+    }
+    lspconfig.phpactor.setup{
+      capabilities = capabilities,
+    }
+    lspconfig.jdtls.setup{
+      capabilities = capabilities,
+    }
     
+    lspconfig.omnisharp.setup {
+      cmd = { "/usr/bin/dotnet", "/home/tui/Biblioteki/omnisharp/OmniSharp.dll" },
+
+      handlers = { ["textDocument/definition"] = require('omnisharp_extended').handler },
+  
+      capabilities = capabilities,
+      
+      -- Enables support for reading code style, naming convention and analyzer
+      -- settings from .editorconfig.
+      enable_editorconfig_support = true,
+  
+      -- If true, MSBuild project system will only load projects for files that
+      -- were opened in the editor. This setting is useful for big C# codebases
+      -- and allows for faster initialization of code navigation features only
+      -- for projects that are relevant to code that is being edited. With this
+      -- setting enabled OmniSharp may load fewer projects and may thus display
+      -- incomplete reference lists for symbols.
+      enable_ms_build_load_projects_on_demand = false,
+  
+      -- Enables support for roslyn analyzers, code fixes and rulesets.
+      enable_roslyn_analyzers = false,
+  
+      -- Specifies whether 'using' directives should be grouped and sorted during
+      -- document formatting.
+      organize_imports_on_format = false,
+  
+      -- Enables support for showing unimported types and unimported extension
+      -- methods in completion lists. When committed, the appropriate using
+      -- directive will be added at the top of the current file. This option can
+      -- have a negative impact on initial completion responsiveness,
+      -- particularly for the first few completion sessions after opening a
+      -- solution.
+      enable_import_completion = false,
+  
+      -- Specifies whether to include preview versions of the .NET SDK when
+      -- determining which version to use for project loading.
+      sdk_include_prereleases = true,
+  
+      -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+      -- true
+      analyze_open_documents_only = false,
+    }
+
     -- Global mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -209,6 +315,27 @@ lua <<EOF
         end, opts)
       end,
     })
+    
+    -- omnisharp error workaraound. @see: https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1546721190
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        local function toSnakeCase(str)
+          return string.gsub(str, "%s*[- ]%s*", "_")
+        end
+    
+        if client.name == 'omnisharp' then
+          local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+          for i, v in ipairs(tokenModifiers) do
+            tokenModifiers[i] = toSnakeCase(v)
+          end
+          local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+          for i, v in ipairs(tokenTypes) do
+            tokenTypes[i] = toSnakeCase(v)
+          end
+        end
+      end,
+    })
 
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -234,7 +361,7 @@ lua <<EOF
         -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
         -- the name of the parser)
         -- list of language that will be disabled
-        disable = { "php", "java" },
+        disable = { "php", "java", "cs" },
         -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
         disable = function(lang, buf)
             local max_filesize = 100 * 1024 -- 100 KB
@@ -282,7 +409,7 @@ lua <<EOF
       },
       -- Jump to request line on run
       jump_to_request = false,
-      env_file = '.env',
+      env_file = '.env.local',
       custom_dynamic_variables = {},
       yank_dry_run = true,
     }
