@@ -112,6 +112,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'SirVer/ultisnips'
 " snippets for different languages
 Plug 'honza/vim-snippets'
+" higlight occurences of a variable under the cursor
+Plug 'RRethy/vim-illuminate'
 " middleware between snippets engine and cmp
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'hrsh7th/cmp-nvim-lsp'
