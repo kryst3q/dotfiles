@@ -97,6 +97,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/vim-markdown'
 Plug 'mechatroner/rainbow_csv'
+" color schemes
 Plug 'sainnhe/everforest'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -122,6 +123,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'rest-nvim/rest.nvim'
 Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
 Plug 'Hoffs/omnisharp-extended-lsp.nvim'
 " syntax highlighting
 Plug 'PotatoesMaster/i3-vim-syntax' " i3 config
@@ -130,16 +133,6 @@ Plug 'wgwoods/vim-systemd-syntax' " systemd
 call plug#end()
 
 colorscheme everforest
-
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
 
 " configure searching
 let $FZF_DEFAULT_COMMAND = 'find .'
@@ -171,6 +164,9 @@ let g:lightline = {
     \   'gitbranch': 'MyFugitiveHead'
     \ },
     \}
+
+" vim-dadbod-ui-completion configuration
+autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
 
 lua <<EOF
     require('cmp_nvim_ultisnips').setup{}
@@ -255,11 +251,11 @@ lua <<EOF
       enable_ms_build_load_projects_on_demand = false,
   
       -- Enables support for roslyn analyzers, code fixes and rulesets.
-      enable_roslyn_analyzers = false,
+      enable_roslyn_analyzers = true,
   
       -- Specifies whether 'using' directives should be grouped and sorted during
       -- document formatting.
-      organize_imports_on_format = false,
+      organize_imports_on_format = true,
   
       -- Enables support for showing unimported types and unimported extension
       -- methods in completion lists. When committed, the appropriate using
@@ -267,7 +263,7 @@ lua <<EOF
       -- have a negative impact on initial completion responsiveness,
       -- particularly for the first few completion sessions after opening a
       -- solution.
-      enable_import_completion = false,
+      enable_import_completion = true,
   
       -- Specifies whether to include preview versions of the .NET SDK when
       -- determining which version to use for project loading.
