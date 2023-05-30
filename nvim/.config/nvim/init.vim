@@ -124,6 +124,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'rest-nvim/rest.nvim'
+Plug 'vim-test/vim-test'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kristijanhusak/vim-dadbod-completion'
@@ -148,6 +149,17 @@ nmap <F9> :TagbarToggle<CR>
 nmap <leader>hr <Plug>RestNvim<CR>
 nmap <leader>hp <Plug>RestNvimPreview<CR>
 nmap <leader>hl <Plug>RestNvimLast<CR>
+
+" vim-test configuration
+let test#strategy = 'neovim'
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+
+" fzf.vim Buffers mapping
+nmap <silent> <S-b> :Buffers<CR>
 
 function MyFugitiveHead()
   let head = FugitiveHead()
@@ -232,48 +244,11 @@ lua <<EOF
     lspconfig.jdtls.setup{
       capabilities = capabilities,
     }
-    
     lspconfig.omnisharp.setup {
       cmd = { "/usr/bin/dotnet", "/home/tui/Biblioteki/omnisharp/OmniSharp.dll" },
-
       handlers = { ["textDocument/definition"] = require('omnisharp_extended').handler },
-  
       capabilities = capabilities,
-      
-      -- Enables support for reading code style, naming convention and analyzer
-      -- settings from .editorconfig.
-      enable_editorconfig_support = true,
-  
-      -- If true, MSBuild project system will only load projects for files that
-      -- were opened in the editor. This setting is useful for big C# codebases
-      -- and allows for faster initialization of code navigation features only
-      -- for projects that are relevant to code that is being edited. With this
-      -- setting enabled OmniSharp may load fewer projects and may thus display
-      -- incomplete reference lists for symbols.
-      enable_ms_build_load_projects_on_demand = false,
-  
-      -- Enables support for roslyn analyzers, code fixes and rulesets.
-      enable_roslyn_analyzers = true,
-  
-      -- Specifies whether 'using' directives should be grouped and sorted during
-      -- document formatting.
-      organize_imports_on_format = true,
-  
-      -- Enables support for showing unimported types and unimported extension
-      -- methods in completion lists. When committed, the appropriate using
-      -- directive will be added at the top of the current file. This option can
-      -- have a negative impact on initial completion responsiveness,
-      -- particularly for the first few completion sessions after opening a
-      -- solution.
       enable_import_completion = true,
-  
-      -- Specifies whether to include preview versions of the .NET SDK when
-      -- determining which version to use for project loading.
-      sdk_include_prereleases = true,
-  
-      -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-      -- true
-      analyze_open_documents_only = false,
     }
 
     -- Global mappings.
@@ -288,9 +263,6 @@ lua <<EOF
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf }
