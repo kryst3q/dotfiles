@@ -109,6 +109,8 @@ Plug 'preservim/tagbar'
 Plug 'nvim-tree/nvim-web-devicons'
 " pretty diagnostics, warnings, referneces and so on
 Plug 'folke/trouble.nvim'
+" highlights, lists and TODOs in the project
+Plug 'folke/todo-comments.nvim'
 " provide information about LSP progress
 Plug 'j-hui/fidget.nvim'
 " Preview markdown file in browser
@@ -314,6 +316,8 @@ lua <<EOF
     })
 
     require"fidget".setup{}
+
+    require"todo-comments".setup{}
 
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
