@@ -106,6 +106,8 @@ Plug 'stevearc/dressing.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'preservim/tagbar'
+Plug 'nvim-tree/nvim-web-devicons'
+" provide information about LSP progress
 Plug 'j-hui/fidget.nvim'
 " Preview markdown file in browser
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} 
