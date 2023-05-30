@@ -107,6 +107,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'preservim/tagbar'
 Plug 'nvim-tree/nvim-web-devicons'
+" pretty diagnostics, warnings, referneces and so on
+Plug 'folke/trouble.nvim'
 " provide information about LSP progress
 Plug 'j-hui/fidget.nvim'
 " Preview markdown file in browser
