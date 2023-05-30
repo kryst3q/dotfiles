@@ -106,6 +106,7 @@ Plug 'stevearc/dressing.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'preservim/tagbar'
+Plug 'j-hui/fidget.nvim'
 " Preview markdown file in browser
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} 
 Plug 'neovim/nvim-lspconfig'
@@ -307,6 +308,8 @@ lua <<EOF
         end
       end,
     })
+
+    require"fidget".setup{}
 
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
