@@ -107,6 +107,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'preservim/tagbar'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'farmergreg/vim-lastplace'
 " pretty diagnostics, warnings, referneces and so on
 Plug 'folke/trouble.nvim'
 " highlights, lists and TODOs in the project
@@ -144,6 +145,11 @@ Plug 'wgwoods/vim-systemd-syntax' " systemd
 call plug#end()
 
 colorscheme everforest
+
+" vim-lastplace configuration
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix,nofile,help"
+let g:lastplace_open_folds = 0
 
 " configure searching
 let $FZF_DEFAULT_COMMAND = 'find .'
