@@ -202,4 +202,8 @@ workspace_layout tabbed
 
 for_window [floating] resize set 900 500
 
+# Automatically focus on dashboard eg. when link in another dashboard is clicked
+# @see https://unix.stackexchange.com/a/714452
+for_window [urgent="latest" class="Microsoft-edge"] focus
+
 include $XDG_CONFIG_HOME/i3/config.d/*.conf
