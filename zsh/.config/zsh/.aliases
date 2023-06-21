@@ -43,6 +43,7 @@ alias diff="kitty +kitten diff"
 # docker
 alias dcud="docker-compose up -d"
 alias dcd="docker-compose down"
+alias dcs="docker-compose stop"
 alias dcps="docker-compose ps"
 alias dcl="docker-compose logs"
 alias dclt="docker-compose logs --tail"
