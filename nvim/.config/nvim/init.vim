@@ -40,6 +40,7 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <S-f> :NERDTreeFind<CR>
 let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeWinSize=80
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
@@ -90,6 +91,7 @@ let g:everforest_better_performance = 1
 " vim-plug plugins list
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-projectionist'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -184,13 +186,18 @@ function MyFugitiveHead()
   return head
 endfunction
 
+function LightlineFilename()
+    return expand('%')
+endfunction
+
 let g:lightline = {
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
     \ },
     \ 'component_function': {
-    \   'gitbranch': 'MyFugitiveHead'
+    \   'gitbranch': 'MyFugitiveHead',
+    \   'filename': 'LightlineFilename',
     \ },
     \}
 
@@ -408,4 +415,7 @@ let local_config = stdpath('config') . '/local.vim'
 if filereadable(local_config)
     execute 'source ' . local_config
 endif
+
+" let searching for additonal configuration files
+set exrc
 
