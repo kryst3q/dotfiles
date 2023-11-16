@@ -14,4 +14,6 @@ local/.config/local/share/*
 !local/.config/local/share/dark-mode.d
 !local/.config/local/share/light-mode.d
 PrusaSlic3r/.config/PrusaSlic3r/cache/*
+lvim/.config/lvim/session
+lvim/.config/lvim/lazy-lock.json
 
