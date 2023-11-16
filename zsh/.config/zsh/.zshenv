@@ -36,7 +36,7 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 
 # editor
-export EDITOR="nvim"
+export EDITOR="lvim"
 export VISUAL="gedit"
 
 # terminal
