@@ -47,3 +47,7 @@ export CM_IGNORE_WINDOW="Seahorse"
 
 # jira-cli
 export JIRA_AUTH_TYPE="bearer"
+
+# hledger
+export LEDGER_FILE="$HOME/Finanse/2023.journal"
+
