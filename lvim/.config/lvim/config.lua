@@ -6,6 +6,11 @@ vim.g.test_java_runner = 'maventest'
 
 vim.opt.exrc = true
 
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "intelephense" })
+lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+  return server ~= "phpactor"
+end, lvim.lsp.automatic_configuration.skipped_servers)
+
 lvim.plugins = {
   {
     "kristijanhusak/vim-dadbod-ui",
@@ -56,7 +61,7 @@ lvim.plugins = {
   },
   {
     "rest-nvim/rest.nvim",
-    commit = "8b62563",
+    -- commit = "8b62563",
     dependencies = {
       { "nvim-lua/plenary.nvim" }
     },
@@ -152,6 +157,23 @@ lvim.plugins = {
   {
     "freitass/todo.txt-vim",
     ft = "todo",
+  },
+  {
+    "folke/neodev.nvim",
+    opts = {},
+  },
+  {
+    "weirongxu/plantuml-previewer.vim",
+    dependencies = {
+      {
+        "aklt/plantuml-syntax",
+        ft = "plantuml",
+      },
+      {
+        "tyru/open-browser.vim",
+      },
+    },
+    ft = "plantuml",
   }
 }
 
@@ -232,3 +254,19 @@ lvim.lsp.buffer_mappings.normal_mode["H"] = { "<cmd>bprevious<cr>", "Previous ta
 lvim.lsp.buffer_mappings.normal_mode["L"] = { "<cmd>bnext<cr>", "Next tab" }
 
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "intelephense" })
+
+function GrepInputString()
+  local default = vim.api.nvim_eval([[expand("<cword>")]])
+  local input = vim.fn.input({
+    prompt = "Search for: ",
+    default = default,
+  })
+  require("telescope.builtin").grep_string({ search = input })
+end
+
+lvim.builtin.which_key.mappings["sT"] = { "<cmd>lua GrepInputString()<CR>", "Text under cursor" }
+
+require("neodev").setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
