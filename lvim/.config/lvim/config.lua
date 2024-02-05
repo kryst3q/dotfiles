@@ -2,13 +2,13 @@
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
-vim.g.test_java_runner = 'maventest'
+vim.g.test_java_runner = "maventest"
 
 vim.opt.exrc = true
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "intelephense" })
 lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
-  return server ~= "phpactor"
+	return server ~= "phpactor"
 end, lvim.lsp.automatic_configuration.skipped_servers)
 
 lvim.plugins = {
@@ -199,77 +199,81 @@ lvim.plugins = {
       })
     end,
   },
+	{
+		"normen/vim-pio",
+	},
 }
 
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 
 lvim.autocommands = {
-  {
-    "FileType",
-    {
-      pattern = { "sql", "mysql", "plsql" },
-      callback = function()
-        require("cmp").setup.buffer({
-          sources = {
-            { name = "vim-dadbod-completion" },
-          },
-        })
-      end,
-    }
-  }
+	{
+		"FileType",
+		{
+			pattern = { "sql", "mysql", "plsql" },
+			callback = function()
+				require("cmp").setup.buffer({
+					sources = {
+						{ name = "vim-dadbod-completion" },
+					},
+				})
+			end,
+		},
+	},
 }
 
 lvim.builtin.nvimtree.setup.view.width = 50
 
 lvim.builtin.which_key.mappings["S"] = {
-  name = "Session",
-  c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
-  l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
-  Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+	name = "Session",
+	c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+	l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+	Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
 
 lvim.builtin.which_key.mappings["a"] = {
-  name = "Alternate",
-  a = { "<cmd>A<cr>", "Switches to the corresponding file header" },
-  s = { "<cmd>AS<cr>", "Splits and switches" },
-  v = { "<cmd>AV<cr>", "Vertical splits and switches" },
-  t = { "<cmd>AT<cr>", "New tab and switches" },
-  -- n = {"<cmd>AN<cr>", "Cycles through matches"}, -- Error: AN is not an editor command
+	name = "Alternate",
+	a = { "<cmd>A<cr>", "Switches to the corresponding file header" },
+	s = { "<cmd>AS<cr>", "Splits and switches" },
+	v = { "<cmd>AV<cr>", "Vertical splits and switches" },
+	t = { "<cmd>AT<cr>", "New tab and switches" },
+	-- n = {"<cmd>AN<cr>", "Cycles through matches"}, -- Error: AN is not an editor command
 }
 
 lvim.builtin.which_key.mappings["t"] = {
-  name = "Tests",
-  t = { "<cmd>TestNearest<cr>", "Run the test nearest to the cursor" },
-  -- T = { "<cmd>TestFile<cr>", "Run the first test class found on the same line as or above the cursor" },
-  a = { "<cmd>TestSuite<cr>", "Run the whole test suite" },
-  l = { "<cmd>TestLast<cr>", "Run the last test" },
-  g = { "<cmd>TestLast<cr>", "Visit the test file from which you last run your tests" },
+	name = "Tests",
+	t = { "<cmd>TestNearest<cr>", "Run the test nearest to the cursor" },
+	-- T = { "<cmd>TestFile<cr>", "Run the first test class found on the same line as or above the cursor" },
+	a = { "<cmd>TestSuite<cr>", "Run the whole test suite" },
+	l = { "<cmd>TestLast<cr>", "Run the last test" },
+	g = { "<cmd>TestLast<cr>", "Visit the test file from which you last run your tests" },
 }
 
 lvim.builtin.which_key.mappings["r"] = {
-  name = "Replace",
-  r = { "<cmd>lua require('spectre').toggle()<cr>", "Toggle replace" },
-  a = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace current word everywhere" },
-  f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", "Replace current word in file" },
+	name = "Replace",
+	r = { "<cmd>lua require('spectre').toggle()<cr>", "Toggle replace" },
+	a = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace current word everywhere" },
+	f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", "Replace current word in file" },
 }
-
 
 lvim.builtin.which_key.mappings["y"] = {
-  name = "Clipboard",
-  cmd = "<cmd>Telescope neoclip<cr>",
+	name = "Clipboard",
+	cmd = "<cmd>Telescope neoclip<cr>",
 }
 
-table.insert(lvim.builtin.alpha.dashboard.section.buttons.entries,
-  { "s", "  Open Last Session", "<cmd>lua require('persistence').load()<cr>" })
+table.insert(
+	lvim.builtin.alpha.dashboard.section.buttons.entries,
+	{ "s", "  Open Last Session", "<cmd>lua require('persistence').load()<cr>" }
+)
 
 lvim.builtin.treesitter.ensure_installed = {
-  "java",
-  "php",
-  "bash",
-  "json",
-  "html",
-  "http",
-  "c_sharp",
+	"java",
+	"php",
+	"bash",
+	"json",
+	"html",
+	"http",
+	"c_sharp",
 }
 lvim.lsp.buffer_mappings.normal_mode["gr"] = { "<cmd>Telescope lsp_references<cr>", "References" }
 lvim.lsp.buffer_mappings.normal_mode["gd"] = { "<cmd>Telescope lsp_definitions<cr>", "Definitions" }
@@ -280,16 +284,16 @@ lvim.lsp.buffer_mappings.normal_mode["L"] = { "<cmd>bnext<cr>", "Next tab" }
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "intelephense" })
 
 function GrepInputString()
-  local default = vim.api.nvim_eval([[expand("<cword>")]])
-  local input = vim.fn.input({
-    prompt = "Search for: ",
-    default = default,
-  })
-  require("telescope.builtin").grep_string({ search = input })
+	local default = vim.api.nvim_eval([[expand("<cword>")]])
+	local input = vim.fn.input({
+		prompt = "Search for: ",
+		default = default,
+	})
+	require("telescope.builtin").grep_string({ search = input })
 end
 
 lvim.builtin.which_key.mappings["sT"] = { "<cmd>lua GrepInputString()<CR>", "Text under cursor" }
 
 require("neodev").setup({
-  library = { plugins = { "nvim-dap-ui" }, types = true },
+	library = { plugins = { "nvim-dap-ui" }, types = true },
 })
