@@ -60,6 +60,17 @@ lvim.plugins = {
     -- end
   },
   {
+    "wfxr/protobuf.vim",
+    ft = { "proto" },
+  },
+  {
+    "hudclark/grpc-nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+    },
+    ft = "grpc",
+  },
+  {
     "rest-nvim/rest.nvim",
     -- commit = "8b62563",
     dependencies = {
@@ -174,7 +185,20 @@ lvim.plugins = {
       },
     },
     ft = "plantuml",
-  }
+  },
+  {
+    "vinnymeller/swagger-preview.nvim",
+    build = "npm install -g swagger-ui-watcher",
+    cmd = "SwaggerPreview",
+    config = function()
+      require("swagger-preview").setup({
+        -- The port to run the preview server on
+        port = 9876,
+        -- The host to run the preview server on
+        host = "localhost",
+      })
+    end,
+  },
 }
 
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
@@ -269,4 +293,3 @@ lvim.builtin.which_key.mappings["sT"] = { "<cmd>lua GrepInputString()<CR>", "Tex
 require("neodev").setup({
   library = { plugins = { "nvim-dap-ui" }, types = true },
 })
-
