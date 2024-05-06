@@ -41,6 +41,7 @@ export PATH=$HOME/.local/bin:$PATH
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
+source /usr/share/nvm/init-nvm.sh
+
 # Enable syntax highliting in shell. MUST be sourced at the end of the file!
 source "${ZDOTDIR}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
