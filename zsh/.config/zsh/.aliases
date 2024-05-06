@@ -54,7 +54,7 @@ alias nvim="nvim --listen /tmp/nvimsocket" # required so running https://github.
 # exa
 alias lx="exa --long --icons"
 
-# todo.txt
+# https://github.com/todotxt/todo.txt-cli
 alias t="todo.sh"
 
 source $XDG_CONFIG_HOME/zsh/aliases.d/*.aliases

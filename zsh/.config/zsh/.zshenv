@@ -19,7 +19,7 @@ if [ $(uname) = "Linux" ]; then
     export FZF_PATH=/usr/share/fzf
 else
     # fzf
-    export FZF_PATH=/usr/local/Cellar/fzf/0.37.0/shell
+    export FZF_PATH="/usr/local/Cellar/fzf/$(ls /usr/local/Cellar/fzf/)/shell"
 fi
 
 # XDG
