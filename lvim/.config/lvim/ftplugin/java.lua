@@ -4,9 +4,9 @@ vim.g["test#java#runner"] = "maventest"
 -- Define a command named IntegrationTest
 vim.cmd('command! -nargs=* -bar IntegrationTest call test#run("integration", split(<q-args>))')
 
-if true then
-  return
-end
+-- if true then
+--   return
+-- end
 
 local status, jdtls = pcall(require, "jdtls")
 if not status then

@@ -8,8 +8,6 @@ lvim.keys.normal_mode["L"] = "<cmd>bnext<cr>"
 
 vim.g.test_java_runner = "maventest"
 
-vim.opt.exrc = true
-
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "intelephense" })
 lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
   return server ~= "phpactor"
@@ -17,12 +15,29 @@ end, lvim.lsp.automatic_configuration.skipped_servers)
 
 lvim.plugins = {
   {
+    "MunifTanjim/exrc.nvim",
+    config = function()
+      require("exrc").setup({
+        files = {
+          ".nvimrc.lua",
+          ".nvimrc",
+          ".exrc.lua",
+          ".exrc",
+        },
+      })
+    end,
+  },
+  {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
       { "tpope/vim-dadbod",                     lazy = true },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
     },
     cmd = { "DBUI", "DBUIFindBuffer" },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
   },
   {
     "folke/persistence.nvim",
@@ -47,6 +62,14 @@ lvim.plugins = {
   },
   {
     "mfussenegger/nvim-jdtls",
+    -- opts = {
+    --   jdtls = function(opts)
+    --     local install_path = require("mason-registry").get_package("jdtls"):get_install_path()
+    --     local jvmArg = "-javaagent:" .. install_path .. "/lombok.jar"
+    --     table.insert(opts.cmd, "--jvm-arg=" .. jvmArg)
+    --     return opts
+    --   end,
+    -- },
     -- config = function()
     --   local bundles = {}
     --   local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
@@ -285,6 +308,7 @@ lvim.builtin.which_key.mappings["t"] = {
   a = { "<cmd>TestSuite<cr>", "Run the whole test suite" },
   l = { "<cmd>TestLast<cr>", "Run the last test" },
   g = { "<cmd>TestLast<cr>", "Visit the test file from which you last run your tests" },
+  -- TODO: add debug mode toggle
 }
 
 lvim.builtin.which_key.mappings["r"] = {
