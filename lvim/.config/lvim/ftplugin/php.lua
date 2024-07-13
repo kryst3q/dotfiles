@@ -14,6 +14,7 @@ dap.configurations.php = {
     port = 9000,
     log = true,
     pathMappings = {
+      ["/srv/api/"] = "${workspaceFolder}",
       ["/srv/"] = "${workspaceFolder}"
     }
   },
