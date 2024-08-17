@@ -62,6 +62,7 @@ lvim.plugins = {
   },
   {
     "mfussenegger/nvim-jdtls",
+    ft = "java",
     -- opts = {
     --   jdtls = function(opts)
     --     local install_path = require("mason-registry").get_package("jdtls"):get_install_path()
@@ -159,7 +160,10 @@ lvim.plugins = {
     ft = "http",
     dependencies = { "luarocks.nvim" },
     config = function()
-      require("rest-nvim").setup()
+      require("rest-nvim").setup({
+        env_file = '.local.env',
+        env_pattern = '^' .. vim.fn.escape(vim.fn.getcwd(), '\\') .. '/\\.[^.]+\\.env$',
+      })
       -- first load extension
       require("telescope").load_extension("rest")
     end,
@@ -196,15 +200,6 @@ lvim.plugins = {
   },
   {
     "mechatroner/rainbow_csv",
-    ft = {
-      "csv",
-      "tsv",
-      "csv_semicolon",
-      "csv_whitespace",
-      "csv_pipe",
-      "rfc_csv",
-      "rfc_semicolon",
-    },
   },
   {
     "73/vim-klog",
@@ -290,9 +285,24 @@ lvim.plugins = {
   --     vim.g.vim_markdown_folding_disabled = 1
   --   end
   -- },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup({
+        api_key_cmd = 'secret-tool lookup apikey lvim-chatgpt',
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  }
 }
 
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 
 lvim.autocommands = {
   {
@@ -394,3 +404,20 @@ lvim.builtin.which_key.mappings["sT"] = { "<cmd>lua GrepInputString()<CR>", "Tex
 require("neodev").setup({
   library = { plugins = { "nvim-dap-ui" }, types = true },
 })
+
+lvim.builtin.which_key.mappings["i"] = {
+  name = "ChatGPT",
+  c = { "<cmd>ChatGPT<CR>", "ChatGPT" },
+  e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
+  g = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction", mode = { "n", "v" } },
+  t = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
+  k = { "<cmd>ChatGPTRun keywords<CR>", "Keywords", mode = { "n", "v" } },
+  d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
+  a = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests", mode = { "n", "v" } },
+  o = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code", mode = { "n", "v" } },
+  s = { "<cmd>ChatGPTRun summarize<CR>", "Summarize", mode = { "n", "v" } },
+  f = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs", mode = { "n", "v" } },
+  x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
+  r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
+  l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
+}

@@ -1,12 +1,14 @@
+local config = {
+    cmd = {'/usr/bin/jdtls'},
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+}
+require('jdtls').start_or_attach(config)
+
 -- Based on https://medium.com/@chrisatmachine/lunarvim-as-a-java-ide-da65c4a77fb4 (https://github.com/LunarVim/starter.lvim/tree/java-ide)
 vim.g["test#java#runner"] = "maventest"
 
 -- Define a command named IntegrationTest
 vim.cmd('command! -nargs=* -bar IntegrationTest call test#run("integration", split(<q-args>))')
-
--- if true then
---   return
--- end
 
 local status, jdtls = pcall(require, "jdtls")
 if not status then
