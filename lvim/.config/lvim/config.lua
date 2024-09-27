@@ -150,7 +150,7 @@ lvim.plugins = {
   {
     "vhyrro/luarocks.nvim",
     priority = 1000,
-    config = true,
+    config = function() end,
     opts = {
       rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
     }
@@ -158,7 +158,7 @@ lvim.plugins = {
   {
     "rest-nvim/rest.nvim",
     ft = "http",
-    dependencies = { "luarocks.nvim", "j-hui/fidget.nvim" },
+    dependencies = { "vhyrro/luarocks.nvim", "j-hui/fidget.nvim" },
     config = function()
       -- require("rest-nvim").setup({
       --   env = {
