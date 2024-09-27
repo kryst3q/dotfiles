@@ -1,0 +1,6 @@
+[Unit]
+Description=Low Battery Warning
+
+[Service]
+ExecStart=$XDG_DATA_HOME/systemd-scripts/low_battery_warning.sh
+

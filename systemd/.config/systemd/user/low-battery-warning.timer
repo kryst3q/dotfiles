@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Battery Warning Service every minute
+
+[Timer]
+OnUnitActiveSec=1m
+Unit=low-battery-warning.service
+
+[Install]
+WantedBy=timers.target
+
