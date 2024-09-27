@@ -1,0 +1,2 @@
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-9]", ATTR{capacity}=="10", RUN+="/usr/local/bin/battery_warning.sh", MODE="0666"
+
