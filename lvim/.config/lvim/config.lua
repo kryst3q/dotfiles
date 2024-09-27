@@ -158,12 +158,15 @@ lvim.plugins = {
   {
     "rest-nvim/rest.nvim",
     ft = "http",
-    dependencies = { "luarocks.nvim" },
+    dependencies = { "luarocks.nvim", "j-hui/fidget.nvim" },
     config = function()
-      require("rest-nvim").setup({
-        env_file = '.local.env',
-        env_pattern = '^' .. vim.fn.escape(vim.fn.getcwd(), '\\') .. '/\\.[^.]+\\.env$',
-      })
+      -- require("rest-nvim").setup({
+      --   env = {
+      --     pattern = ".*/Rest/.*%.env.*",
+      --   },
+      -- })
+      -- show which env file is loaded in the status bar
+      lvim.builtin.lualine.sections.lualine_x = { "rest" }
       -- first load extension
       require("telescope").load_extension("rest")
     end,
@@ -299,7 +302,8 @@ lvim.plugins = {
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim"
     }
-  }
+  },
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }
 }
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
