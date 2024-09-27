@@ -187,6 +187,10 @@ bindsym $mod+Ctrl+3 exec flameshot screen -p "$SCREENSHOTS_DIR"
 bindsym $mod+Ctrl+4 exec flameshot gui -p "$SCREENSHOTS_DIR"
 bindsym $mod+C exec clipmenu
 
+# move focused workspace between monitors
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
+
 bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 bindsym XF86AudioRaiseVolume exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/volume_brightness.sh volume_up
 bindsym XF86AudioLowerVolume exec --no-startup-id $XDG_CONFIG_HOME/i3/scripts/volume_brightness.sh volume_down
