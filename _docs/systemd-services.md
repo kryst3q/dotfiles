@@ -1,0 +1,5 @@
+- darkman.service
+- geoclue-agent.service
+- low-battery-warning.timer
+- redshift.service
+- docker resources limiting: https://baykara.medium.com/docker-resource-management-via-cgroups-and-systemd-633b093a835c
