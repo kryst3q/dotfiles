@@ -98,59 +98,13 @@ lvim.plugins = {
     },
     ft = "grpc",
   },
-  -- {
-  --   "rest-nvim/rest.nvim",
-  --   -- commit = "8b62563",
-  --   dependencies = {
-  --     { "nvim-lua/plenary.nvim" }
-  --   },
-  --   prefix = "",
-  --   ft = "http",
-  --   config = function()
-  --     require("rest-nvim").setup({
-  --       -- Open request results in a horizontal split
-  --       result_split_horizontal = false,
-  --       -- Keep the http file buffer above|left when split horizontal|vertical
-  --       result_split_in_place = false,
-  --       -- Skip SSL verification, useful for unknown certificates
-  --       skip_ssl_verification = false,
-  --       -- Encode URL before making request
-  --       encode_url = true,
-  --       -- Highlight request on run
-  --       highlight = {
-  --         enabled = true,
-  --         timeout = 150,
-  --       },
-  --       result = {
-  --         -- toggle showing URL, HTTP info, headers at top the of result window
-  --         show_url = true,
-  --         -- show the generated curl command in case you want to launch
-  --         -- the same request via the terminal (can be verbose)
-  --         show_curl_command = false,
-  --         show_http_info = true,
-  --         show_headers = true,
-  --         -- executables or functions for formatting response body [optional]
-  --         -- set them to false if you want to disable them
-  --         formatters = {
-  --           json = "jq",
-  --           html = function(body)
-  --             return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-  --           end,
-  --         },
-  --       },
-  --       -- Jump to request line on run
-  --       jump_to_request = false,
-  --       env_file = ".env.local",
-  --       custom_dynamic_variables = {},
-  --       yank_dry_run = true,
-  --       ft = { "http" },
-  --     })
-  --   end,
-  -- },
   {
     "vhyrro/luarocks.nvim",
     priority = 1000,
-    config = function() end,
+    config = function()
+      require("luarocks-nvim").setup()
+    end,
+    -- config = true,
     opts = {
       rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
     }
@@ -158,7 +112,10 @@ lvim.plugins = {
   {
     "rest-nvim/rest.nvim",
     ft = "http",
-    dependencies = { "vhyrro/luarocks.nvim", "j-hui/fidget.nvim" },
+    dependencies = { "j-hui/fidget.nvim" },
+    opts = {
+      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }, -- Specify LuaRocks packages to install
+    },
     config = function()
       -- require("rest-nvim").setup({
       --   env = {
@@ -303,7 +260,22 @@ lvim.plugins = {
       "nvim-telescope/telescope.nvim"
     }
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }
+  {
+    "ellisonleao/glow.nvim",
+    config = true,
+    cmd = "Glow"
+  },
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('telekasten').setup({
+        home = vim.fn.expand("~/Nextcloud Ostróda/Notatki/Zettelkasten"), -- Put the name of your notes directory here
+        template_new_note = vim.fn.expand("~/Nextcloud Ostróda/Notatki/Zettelkasten/new_note_template.md "),    -- template for new notes
+        new_note_filename = "uuid",
+      })
+    end
+  },
 }
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
@@ -424,4 +396,16 @@ lvim.builtin.which_key.mappings["i"] = {
   x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
   r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
   l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
+}
+
+lvim.builtin.which_key.mappings["z"] = {
+  name = "Telekasten",
+  f = { "<cmd>Telekasten find_notes<CR>", "", mode = { "n" } },
+  t = { "<cmd>Telekasten search_notes<CR>", "", mode = { "n" } },
+  d = { "<cmd>Telekasten goto_today<CR>", "", mode = { "n" } },
+  z = { "<cmd>Telekasten follow_link<CR>", "", mode = { "n" } },
+  n = { "<cmd>Telekasten new_note<CR>", "", mode = { "n" } },
+  c = { "<cmd>Telekasten show_calendar<CR>", "", mode = { "n" } },
+  b = { "<cmd>Telekasten show_backlinks<CR>", "", mode = { "n" } },
+  I = { "<cmd>Telekasten insert_img_link<CR>", "", mode = { "n" } },
 }
